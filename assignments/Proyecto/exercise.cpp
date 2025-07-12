@@ -1,3 +1,4 @@
+#include "Personaje.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
