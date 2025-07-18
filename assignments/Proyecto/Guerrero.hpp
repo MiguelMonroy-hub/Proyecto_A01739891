@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <string>
 #include "Personaje.hpp"
@@ -17,8 +16,11 @@ class Guerrero : public Personaje{
     void setIra(int i);
     int getArmadura();
     void setArmadura(int arm);
+    void recibeAtaque(int ptosAtaque)override;
+    void atacar(Personaje& objetivo)override;
     bool defensaExtra()const;
     bool activarIra()const;
-    bool activarCritico()const;
+    bool activarCritico()override;
+    bool estaVivo()const override;
     void imprimir()const override;
 };

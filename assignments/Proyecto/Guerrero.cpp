@@ -11,16 +11,41 @@ int Guerrero::getIra(){return ira;}
 void Guerrero::setIra(int i){i = ira;}
 int Guerrero::getArmadura(){return armadura;}
 void Guerrero::setArmadura(int arm){arm = armadura;}
+
+void Guerrero::recibeAtaque(int ptosAtaque){
+    int damage = ptosAtaque - defensa;
+    if(defensaExtra()) damage -= armadura;
+    if(damage > 0) salud -= damage;
+    if(!estaVivo()){
+        if (ira >= 40){
+            salud = 25;
+            ira -=40;
+        }
+    }
+}
+
+void Guerrero::atacar(Personaje& objetivo){
+    int damage = ataque;
+    if(activarCritico()) damage *= 2;
+    objetivo.recibeAtaque(damage);
+}
+
 bool Guerrero::defensaExtra()const{
     float chance = static_cast<float>(rand()) / RAND_MAX;
     return chance < .25;
 }
+
 bool Guerrero::activarIra()const{
     return ira >= 50;
 }
-bool Guerrero::activarCritico()const{
+
+bool Guerrero::activarCritico(){
     float chance = static_cast<float>(rand()) / RAND_MAX;
         return (chance <= (getCritico() + fuerza * .005));
+}
+
+bool Guerrero::estaVivo()const{
+    return salud > 0 || ira >= 40;
 }
 void Guerrero::imprimir()const{
     cout << "Nombre: " << getNombre() << endl;

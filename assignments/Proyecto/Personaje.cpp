@@ -32,6 +32,15 @@ float Personaje::getCritico()const{return critico;}
 void Personaje::setCritico(float c){critico = c;}
 
 int Personaje::porcentajeSalud()const{
+    return static_cast<int>((100.0 * salud) / vida);
+}
+ostream& operator<<(ostream& os, const Personaje& p){
+    p.imprimir();
+    return os;
+}
+
+/*
+int Personaje::porcentajeSalud()const{
     return (int)(((double)salud / vida)*100);
 }
 
@@ -85,3 +94,4 @@ void Personaje::imprimir()const{
     cout << "Barra de vida: ";
     imprimeBarra();
 }
+*/

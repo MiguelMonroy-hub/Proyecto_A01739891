@@ -1,12 +1,12 @@
 // Crear el archivo header de la clase Personaje, no olvides las guardas o el pragma.
 #pragma once
 #include <string>
+#include <iostream>
 
 class Personaje{
-    private:
+    protected:
         int vida,salud,ataque,nivel,defensa;
         std::string nombre;
-    protected:
         float critico;
     public:
         Personaje();
@@ -36,10 +36,11 @@ class Personaje{
 
         void imprimeBarra()const;
 
-        void recibeAtaque(int ptosAtaque);
+        virtual void recibeAtaque(int ptosAtaque) = 0;
+        virtual void atacar(Personaje& objetivo) = 0;
+        virtual bool activarCritico() = 0;
+        virtual void imprimir()const = 0;
+        virtual bool estaVivo()const = 0;
 
-        virtual void atacar(Personaje& objetivo);
-        virtual bool activarCritico()const;
-        virtual void imprimir()const;
-
+        friend std::ostream& operator<<(std::ostream& os, const Personaje& p);
 };  
