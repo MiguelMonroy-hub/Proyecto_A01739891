@@ -58,4 +58,5 @@ void Guerrero::imprimir()const{
     cout << "Fuerza: " << fuerza << endl;
     cout << "Armadura(Defensa extra): " << armadura << endl;
     cout << "Ira: " << ira << endl;
+    imprimeBarra();
 }

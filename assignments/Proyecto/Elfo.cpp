@@ -75,4 +75,5 @@ void Elfo::imprimir() const {
     cout << "Precision: " << precision * 100 << " % " << endl;
     cout << "Velocidad: " << velocidad << endl;
     cout << "Disparos disponibles: " << disparos << endl;
+    imprimeBarra();
 }

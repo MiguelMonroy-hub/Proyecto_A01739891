@@ -34,6 +34,15 @@ void Personaje::setCritico(float c){critico = c;}
 int Personaje::porcentajeSalud()const{
     return static_cast<int>((100.0 * salud) / vida);
 }
+
+void Personaje::imprimeBarra()const{
+    int porcentaje = porcentajeSalud();
+    int llenos = (porcentaje * 20) / 100;
+    for (int i = 0; i < llenos; ++i) cout << '%';
+    for (int i = llenos; i < 20; ++i) cout << '.';
+    cout << "(" << porcentaje << "%)\n";
+}
+
 ostream& operator<<(ostream& os, const Personaje& p){
     p.imprimir();
     return os;

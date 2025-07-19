@@ -61,4 +61,6 @@ void Mago::imprimir()const{
     cout << "Mana: " << mana << endl;
     cout << "Elemento: " << elemento << endl;
     cout << "Numero de hechizos: " << hechizos << endl;
+
+    imprimeBarra();
 }
