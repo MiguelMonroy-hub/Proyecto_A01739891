@@ -18,15 +18,15 @@ classDiagram
     Personaje <|-- Guerrero
 
 class Personaje {
-    <<abstract>>
-    - nombre: string
-    - critico: float
-    - salud: int
-    - ataque: int
-    - defensa: int
-    - vida: int
-    - nivel: int
-    - experiencia: int
+    
+    # nombre: string
+    # critico: float
+    # salud: int
+    # ataque: int
+    # defensa: int
+    # vida: int
+    # nivel: int
+    # experiencia: int
 
     + Personaje()
     + Personaje(string, float, int, int, int, int, int, int)
