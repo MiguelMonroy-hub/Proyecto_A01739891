@@ -1,77 +1,137 @@
-#include <iostream>
+#include "Combate.hpp"
+#include <windows.h>
+
+int main() {
+    SetConsoleOutputCP(65001);  // UTF-8 en Windows
+
+    Combate simulacion;
+    simulacion.iniciarCombate();
+
+    return 0;
+}
+
+
+/*
+#include <windows.h>
+#include "Combate.hpp"
+
+int main() {
+    SetConsoleOutputCP(65001);
+
+    Combate combate;
+
+    combate.agregarPersonaje(new Elfo("Legolas", 0.25f, 100, 70, 40, 100, 1, 0, 30, 80));
+    combate.agregarPersonaje(new Guerrero("Arthas", 0.2f, 150, 80, 50, 200, 1, 0, 30, 90, 20)); // aura e ira altos para revivir
+    combate.agregarPersonaje(new Mago("Merlin", 0.3f, 120, 90, 30, 150, 1, 0, 70, "Fuego", 3)); // mana alto para revivir
+
+    combate.mostrarEstado();
+    combate.iniciar();
+
+    return 0;
+}
+*/
+/* Si quieres ocupar este codigo, necesitas tener activo los archivos Combate.hpp y Combate.cpp*/
+
+/*#include <iostream>
 #include <cstdlib>
+#include <ctime>  
 #include <vector>
-#include <ctime>
+#include "Elfo.hpp"
 #include "Guerrero.hpp"
 #include "Mago.hpp"
-#include "Elfo.hpp"
+#include "Personaje.hpp"
 #include <windows.h>
 using namespace std;
 
 int main() {
     SetConsoleOutputCP(65001);
-    srand(static_cast<unsigned>(time(0))); 
+    srand(static_cast<unsigned int>(time(nullptr)));
 
-    vector<Personaje*>personajes;
-    personajes.push_back(new Guerrero(15,40,10,100,100,20,5,10,"Ares",0.2));
-    personajes.push_back(new Mago(80,"Fuego",3,90,90,15,4,8,"Merlin",0.25));
-    personajes.push_back(new Elfo(85,85,18,4,6,"Legolas",0.3f,0.75f,12,6));
+    
+    vector<Personaje*> personajes;
+    personajes.push_back(new Elfo ("Legolas", 0.25f, 100, 70, 40, 100, 1, 0, 30, 80));
+    personajes.push_back(new Guerrero ("Arthas", 0.2f, 150, 80, 50, 200, 1, 0, 30, 50, 20));
+    personajes.push_back(new Mago ("Merlin", 0.3f, 120, 90, 30, 150, 1, 0, 50, "Fuego", 3));
 
-    cout << "=== PERSONAJES ===" << endl;
-    for (Personaje*p : personajes){
+    
+    cout << "=== Estado inicial ===\n" << endl;
+    for (Personaje* p : personajes){
         cout << *p << endl;
     }
 
-     cout << "====== COMBATE ======" << endl;
-    personajes[0]->atacar(*personajes[1]);
-    cout << "Después del ataque a " << personajes[1]->getNombre() << ":" << endl;
+    
+    cout << "\n--- Ataques ---" << endl;
+    personajes[0]->atacar(*personajes[1]); 
     cout << *personajes[1] << endl;
 
-    personajes[0]->atacar(*personajes[2]);
-    cout << "Después del ataque a " << personajes[2]->getNombre() << ":" << endl;
+    personajes[0]->atacar(*personajes[2]); 
     cout << *personajes[2] << endl;
 
-    for (Personaje* p : personajes) delete p;
+    
+    cout << "\n--- Prueba de sobrecarga << ---" << endl;
+    cout << *personajes[0] << endl;
+
+    
+    for (Personaje* p : personajes)
+        delete p;
+
     return 0;
-}
-
+}*/
     /*
-    Guerrero g1(15, 40, 10, 100, 100, 20, 5, 10, "Ares", 0.2);
-    Mago m1(80, "Fuego", 3, 90, 90, 15, 4, 8, "Merlin", 0.25);
-    Elfo e1(0.75, 12, 85, 85, 18, 4, 6, "Legolas", 0.3, 6);
+    legolas.imprimir();
+    cout << "\n";
+    arthas.imprimir();
+    cout << "\n";
+    merlin.imprimir();
+    cout << "\n";
 
-    // Imprimir info inicial
-    cout << "GUERRERO:" << endl;
-    g1.imprimir();
-    cout << endl;
+    
+    cout << "=== Simulación de ataques ===\n";
+    legolas.atacar(arthas);
+    cout << "\n";
+    arthas.atacar(merlin);
+    cout << "\n";
+    merlin.atacar(arthas);
+    cout << "\n";
 
-    cout << "MAGO:" << endl;
-    m1.imprimir();
-    cout << endl;
+    
+    cout << "=== Estado después de ataques ===\n";
+    legolas.imprimir();
+    cout << "\n";
+    arthas.imprimir();
+    cout << "\n";
+    merlin.imprimir();
+    cout << "\n";*/
 
-    cout << "ELFO:" << endl;
-    e1.imprimir();
-    cout << endl;
 
-    // Simulación de ataques
-    cout << "====== COMBATE ======" << endl;
+/*#include "Personaje.hpp"
+#include <iostream>
+#include <windows.h>
+using namespace std;
 
-    g1.atacar(m1);  // Guerrero ataca a Mago
-    cout << endl;
+int main(){
+    SetConsoleOutputCP(65001);
 
-    m1.atacar(e1);  // Mago ataca a Elfo
-    cout << endl;
+    Personaje p1("Legolas",.2,100,50,30,100,2,0);
+    Personaje p2("Aragon",.1,120,60,40,120,3,0);
 
-    e1.atacar(g1);  // Elfo ataca a Guerrero
-    cout << endl;
-
-    // Comprobar ira del Guerrero
-    if (g1.activarIra()) {
-        cout << g1.getNombre() << " está furioso y listo para un ataque devastador!" << endl;
-    }
-
-    // Comprobar si defensa extra del Guerrero se activa
-    if (g1.defensaExtra()) {
-        cout << g1.getNombre() << " activó su defensa extra!" << endl;
-    }
-*/
+    p1.calcularAtributos();
+    p2.calcularAtributos(); 
+    p1.imprimir();
+    "\n";
+    cout << "=============================" << endl;
+    p2.imprimir();
+    cout << "=============================" << endl;
+    "\n";
+    cout << "Legolas se prepara para atacar" << endl;
+    p1.atacar(p2);
+    cout << "Legolas ataco a " << p2.getNombre() << endl;
+    "\n";
+    cout << "Aragon se prepara para atacar" << endl;
+    p2.atacar(p1);
+    cout << "Aragon ataco a " << p1.getNombre() << endl;
+    "\n";
+    cout << "Estadisticas de los jugadores" << endl;
+    p1.imprimir();
+    p2.imprimir();
+}*/

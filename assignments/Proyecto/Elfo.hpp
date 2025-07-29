@@ -1,57 +1,38 @@
-/*#pragma once
-#include <iostream>
-#include <string>
-#include "Personaje.hpp"
-
-class Elfo : public Personaje{
-    private:
-    float precision;
-    int velocidad;
-    int disparos;
-    public:
-    Elfo();
-    Elfo(float precision,int velocidad,int vida, int salud, int ataque, int nivel, int defensa, std::string nombre,float critico,int disparos);
-    float getPrecision();
-    void setPrecision(float p);
-    int getVelocidad();
-    void setVelocidad(int v);
-    int getDisparos();
-    void setDisparos(int dis);
-    void recibeAtaque(int ptosAtaque)override;
-    void atacar(Personaje& objetivo)override;
-    bool activarCritico()override;
-    bool estaVivo()const override;
-    void imprimir()const override;
-};*/
-
 #pragma once
-#include <iostream>
-#include <string>
 #include "Personaje.hpp"
 
-class Elfo : public Personaje {
-private:
-    float precision;
-    int velocidad;
-    int disparos;
-public:
-    Elfo();
-    Elfo(int vida, int salud, int ataque, int nivel, int defensa, std::string nombre, float critico,
-         float precision, int velocidad, int disparos);
+class Elfo : public Personaje{ 
+    private:
+        int disparos;
+        int precision;
+    public:
+        Elfo();
+        Elfo(std::string nombre, float critico, int salud, int ataque, int defensa, int vida, int nivel, int experiencia, int disparos, int precision);
 
-    float getPrecision() const;
-    void setPrecision(float p);
+        int getPrecision()const;
+        void setPrecision(int p);
 
-    int getVelocidad() const;
-    void setVelocidad(int v);
+        int getDisparos()const;
+        void setDisparos(int d);
 
-    int getDisparos() const;
-    void setDisparos(int d);
+        int porcentajeSalud()const override;
 
-    
-    void recibeAtaque(int ptosAtaque) override;
-    void atacar(Personaje& objetivo) override;
-    bool activarCritico() override;
-    void imprimir() const override;
-    bool estaVivo() const override;
+        void imprimeBarra()const override;
+
+        void calcularAtributos()override;
+
+        bool activarCritico()override;
+
+        int recibeAtaque(int ptosAtaque) override;
+
+        void atacar(Personaje& objetivo) override;
+
+        void obtenerExperiencia(int exp) override;
+
+        void subirNivel()override;
+
+        bool estaVivo()const override;
+        
+        void imprimir()const override;
+
 };

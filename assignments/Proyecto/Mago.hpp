@@ -1,27 +1,38 @@
-#include <iostream>
-#include <string>
+#pragma once
 #include "Personaje.hpp"
+#include <iostream>
 
 class Mago : public Personaje{
-    private:
+    private: 
         int mana;
         std::string elemento;
-        int hechizos;
+        int hechizo;
     public:
         Mago();
-        Mago(int mana,std::string elemento,int hechizos,int vida, int salud, int ataque, int nivel, int defensa, std::string nombre,float critico);
-        int getMana();
+        virtual ~Mago();
+        Mago(std::string nombre, float critico, int salud, int ataque, int defensa, int vida, int nivel, int experiencia, int mana, std::string elemento, int hechizo);
+
+        int getMana()const;
         void setMana(int m);
 
-        int getHechizos();
-        void setHechizos(int h);
+        std::string getElemento()const;
+        void setElemento(std::string e);
 
-        std::string getElemento();
-        void setElemento(std::string el);
+        int getHechizo()const;
+        void setHechizo(int h);
 
-        void recibeAtaque(int ptosAtaque) override;
-        void atacar(Personaje& objetivo) override;
+        void generarMana();
+
+        void puedeRevivir();
+        
+        int porcentajeSalud()const override;
+        void imprimeBarra()const override;
+        void calcularAtributos()override;
         bool activarCritico()override;
+        int recibeAtaque(int ptosAtaque) override;
+        void atacar(Personaje& objetivo) override;
+        void obtenerExperiencia(int exp) override;
+        void subirNivel()override;
         bool estaVivo()const override;
         void imprimir()const override;
 };

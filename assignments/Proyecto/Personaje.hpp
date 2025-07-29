@@ -1,18 +1,21 @@
-// Crear el archivo header de la clase Personaje, no olvides las guardas o el pragma.
 #pragma once
 #include <string>
 #include <iostream>
-
 class Personaje{
     protected:
-        int vida,salud,ataque,nivel,defensa;
         std::string nombre;
         float critico;
+        int salud,ataque,defensa,vida,nivel,experiencia;
     public:
         Personaje();
-        Personaje(int vida, int salud, int ataque, int nivel, int defensa, std::string nombre,float critico);
-        int getVida()const;
-        void setVida(int v);
+        virtual ~Personaje();
+        Personaje(std::string nombre,float critico,int salud,int ataque,int defensa,int vida, int nivel,int experiencia);
+
+        std::string getNombre()const;
+        void setNombre(std::string nom);
+
+        float getCritico()const;
+        void setCritico(float c);
 
         int getSalud()const;
         void setSalud(int s);
@@ -20,27 +23,28 @@ class Personaje{
         int getAtaque()const;
         void setAtaque(int a);
 
-        int getNivel()const;
-        void setNivel(int n);
-
         int getDefensa()const;
         void setDefensa(int d);
 
-        std::string getNombre()const;
-        void setNombre(const std::string& nom);
+        int getVida()const;
+        void setVida(int v);
 
-        float getCritico()const;
-        void setCritico(float c);
+        int getNivel()const;
+        void setNivel(int n);
 
-        int porcentajeSalud()const;
+        int getExperiencia()const;
+        void setExperiencia(int exp);
 
-        void imprimeBarra()const;
-
-        virtual void recibeAtaque(int ptosAtaque) = 0;
+        virtual int porcentajeSalud()const = 0;
+        virtual void imprimeBarra()const = 0;
+        virtual void calcularAtributos() = 0;
+        virtual bool activarCritico()= 0;
+        virtual int recibeAtaque(int ptosAtaque) = 0;
         virtual void atacar(Personaje& objetivo) = 0;
-        virtual bool activarCritico() = 0;
-        virtual void imprimir()const = 0;
+        virtual void obtenerExperiencia(int exp) = 0;
+        virtual void subirNivel() = 0;
         virtual bool estaVivo()const = 0;
+        virtual void imprimir()const = 0;
 
         friend std::ostream& operator<<(std::ostream& os, const Personaje& p);
-};  
+};

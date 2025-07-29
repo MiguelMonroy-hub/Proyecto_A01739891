@@ -12,99 +12,149 @@ Consulta el archivo assignments/README.md para instrucciones sobre la compilaci�
 
 ```mermaid
 classDiagram
+    Personaje -- Combate
     Personaje <|-- Mago
     Personaje <|-- Elfo
     Personaje <|-- Guerrero
 
-    class Personaje {
-        - vida: int
-        - salud: int
-        - ataque: int
-        - nivel: int
-        - nombre: string
-        - defensa: int
-        # critico: float
+class Personaje {
+    <<abstract>>
+    - nombre: string
+    - critico: float
+    - salud: int
+    - ataque: int
+    - defensa: int
+    - vida: int
+    - nivel: int
+    - experiencia: int
 
-        + Personaje()
-        + Personaje(int, int, int, int, int, nombre: string, float)
-        + getVida() int
-        + setVida(int) void
-        + getSalud() int
-        + setSalud(int) void
-        + getAtaque() int
-        + setAtaque(int) void
-        + getNivel() void
-        + setNivel(int) void
-        + getNombre() void
-        + setNombre(string) void
-        + getDefensa() void
-        + setDefensa(int) void
-        + getCritico() float
-        + setCritico(float) void
-        + porcentajeSalud() int
-        + imprimeBarra() void
-        + recibeAtaque(int) void *
-        + atacar(Personaje &) void
-        + imprimir() void *
-        + estaVivo() bool *
-    }
+    + Personaje()
+    + Personaje(string, float, int, int, int, int, int, int)
 
-    class Mago {
-        - mana: int
-        - elemento: string
-        - hechizos: int
+    + getNombre(): string
+    + setNombre(string): void
+    + getCritico(): float
+    + setCritico(float): void
+    + getSalud(): int
+    + setSalud(int): void
+    + getAtaque(): int
+    + setAtaque(int): void
+    + getDefensa(): int
+    + setDefensa(int): void
+    + getVida(): int
+    + setVida(int): void
+    + getNivel(): int
+    + setNivel(int): void
+    + getExperiencia(): int
 
-        + Mago()
-        + Mago(int, int, string, int, int, int, int, int, int, nombre: string, float)
-        + getMana() int
-        + setMana(int) void
-        + getHechizos() int
-        + setHechizos(int) void
-        + getElemento() string
-        + setElemento(string) void
-        + activarCritico() bool
-        + imprimir() void ↑
-        + recibeAtaque(int) void ↑
-        + estaVivo() bool ↑
-    }
+    + porcentajeSalud(): int
+    + imprimeBarra(): void
+    + calcularAtributos(): void
+    + activarCritico(): bool
+    + recibeAtaque(int): int
+    + atacar(Personaje&): void
+    + obtenerExperiencia(int): void
+    + subirNivel(): void
+    + estaVivo(): bool
+    + imprimir(): void
 
-    class Elfo {
-        - precision: float
-        - velocidad: int
-        - disparos: int
+    + operator<<(ostream&, const Personaje&): friend
+}
 
-        + Elfo()
-        + Elfo(float, int, int, int, int, int, int, int, nombre: string, float)
-        + getPrecision() float
-        + setPrecision(float) void
-        + getVelocidad() int
-        + setVelocidad(int) void
-        + getDisparos() int
-        + setDisparos(float) void
-        + activarCritico() bool
-        + imprimir() void ↑
-        + recibeAtaque(int) void ↑
-        + estaVivo() bool ↑
-    }
+class Combate{
+    - ejercito1 : vector~Personaje*~
+    - ejercito2 : vector~Personaje*~
+    - eliminarEjercitos() : void
+    - crearPersonajeDatos(tipo : string, datos : vector~string~) : Personaje*
+    - batallaEjercitos(p1 : Personaje*, p2 : Personaje*) : void
+    + Combate()
+    + ~Combate()
+    + cargarEjercito(nombreArchivo : string, ejercito : vector~Personaje*&~) : void
+    + mostrarEjercito(ejercito : vector~Personaje*~) const : void
+    + iniciarCombate() : void
+}
 
-    class Guerrero {
-        - fuerza: int
-        - ira: int
-        - armadura: int
+class Mago {
+    - mana: int
+    - elemento: string
+    - hechizo: int
 
-        + Guerrero()
-        + Guerrero(int, int, int, int, int, int, int, int, nombre: string, float)
-        + getFuerza() int
-        + setFuerza(int) void
-        + getIra() int
-        + setIra(int) void
-        + getArmadura() int
-        + setArmadura(int) void
-        + defensaExtra() bool
-        + activarIra() bool
-        + activarCritico() bool
-        + imprimir() void ↑
-        + recibeAtaque(int) void ↑
-        + estaVivo() bool ↑
-    }
+    + Mago()
+    + Mago(string, float, int, int, int, int, int, int, int, string, int)
+
+    + getMana(): int
+    + setMana(int): void
+    + getElemento(): string
+    + setElemento(string): void
+    + getHechizo(): int
+    + setHechizo(int): void
+
+    + generarMana(): void
+    + puedeRevivir(): void
+    + porcentajeSalud(): int
+    + imprimeBarra(): void
+    + calcularAtributos(): void
+    + activarCritico(): bool
+    + recibeAtaque(int): int
+    + atacar(Personaje&): void
+    + obtenerExperiencia(int): void
+    + subirNivel(): void
+    + estaVivo(): bool
+    + imprimir(): void
+}
+
+class Elfo {
+    - precision: int
+    - disparos: int
+
+    + Elfo()
+    + Elfo(string, float, int, int, int, int, int, int, int, int)
+
+    + getPrecision(): int
+    + setPrecision(int): void
+    + getDisparos(): int
+    + setDisparos(int): void
+
+    + porcentajeSalud(): int
+    + imprimeBarra(): void
+    + calcularAtributos(): void
+    + activarCritico(): bool
+    + recibeAtaque(int): int
+    + atacar(Personaje&): void
+    + obtenerExperiencia(int): void
+    + subirNivel(): void
+    + estaVivo(): bool
+    + imprimir(): void
+}
+
+class Guerrero {
+    - aura: int
+    - ira: int
+    - armadura: int
+
+    + Guerrero()
+    + Guerrero(string, float, int, int, int, int, int, int, int, int, int)
+
+    + getAura(): int
+    + setAura(int): void
+    + getIra(): int
+    + setIra(int): void
+    + getArmadura(): int
+    + setArmadura(int): void
+
+    + debilitarPorMagia(int): void
+    + puedeRevivir(): void
+    + defensaExtra(): void
+    + activarIra(): bool
+    + porcentajeSalud(): int
+    + imprimeBarra(): void
+    + calcularAtributos(): void
+    + activarCritico(): bool
+    + recibeAtaque(int): int
+    + atacar(Personaje&): void
+    + obtenerExperiencia(int): void
+    + subirNivel(): void
+    + estaVivo(): bool
+    + imprimir(): void
+}
 ``` 
