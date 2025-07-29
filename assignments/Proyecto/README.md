@@ -13,7 +13,6 @@ Consulta el archivo assignments/README.md para instrucciones sobre la compilaci√
 ```mermaid
 classDiagram
 
-    direction LR
 class Personaje {
     
     # nombre: string
