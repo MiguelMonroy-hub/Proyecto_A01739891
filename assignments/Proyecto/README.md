@@ -12,11 +12,8 @@ Consulta el archivo assignments/README.md para instrucciones sobre la compilaci√
 
 ```mermaid
 classDiagram
-    Personaje -- Combate
-    Personaje <|-- Mago
-    Personaje <|-- Elfo
-    Personaje <|-- Guerrero
 
+    direction LR
 class Personaje {
     
     # nombre: string
@@ -73,6 +70,11 @@ class Combate{
     + mostrarEjercito(ejercito : vector~Personaje*~) const : void
     + iniciarCombate() : void
 }
+    Personaje -- Combate
+    Personaje <|-- Mago
+    Personaje <|-- Elfo
+    Personaje <|-- Guerrero
+
 
 class Mago {
     - mana: int
